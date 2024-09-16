@@ -1,0 +1,18 @@
+Tempo para somar: 2 ms
+Tempo para subtrair: 0 ms
+Tempo para multiplicar: 1 ms
+Tempo para divirdir: 3 ms
+Tempo para exponenciação: 1 ms
+Tempo para radiação: 0 ms
+Tempo para módulo: 1 ms
+Tempo para maior: 0 ms
+Tempo para menor: 0 ms
+Tempo para igualdade: -1 ms
+Tempo para dirença: -1 ms
+Tempo para mínimo: -1 ms
+Tempo para máximo: -3 ms
+Tempo para juro simples: -3 ms
+Tempo para juros compostos: -4 ms
+Tempo para taxa de juros: -5 ms
+Tempo para Valor da Parcela (Sistema Price: -8 ms
+Tempo para Amortização (Sistema SAC): -9 ms

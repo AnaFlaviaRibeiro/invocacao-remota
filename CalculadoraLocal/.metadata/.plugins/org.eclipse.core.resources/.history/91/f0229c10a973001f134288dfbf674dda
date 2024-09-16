@@ -1,0 +1,27 @@
+package test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.rmi.RemoteException;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import application.Calculadora;
+
+class CalculadoraTest {
+	static Calculadora ca;
+	double num1 = 10;
+	double num2 = 5;
+	
+	@BeforeAll
+	static void init() throws RemoteException{
+		ca = new Calculadora();
+	}
+	@Test
+	void test() throws RemoteException {
+		String resultado = ca.dividir(num1, num2);
+		assertEquals(2, resultado);
+	}
+
+}

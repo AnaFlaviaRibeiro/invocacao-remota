@@ -1,0 +1,20 @@
+INDEX VERSION 1.131+C:\Users\Ana Flavia\CalculadoraLocal\.metadata\.plugins\org.eclipse.jdt.core
+1404569872.index
+3819841350.index
+2783712253.index
+591518128.index
+1819400142.index
+464429844.index
+1061141383.index
+3204934314.index
+3129253984.index
+3121277291.index
+1485041442.index
+1865797976.index
+2601371779.index
+3801979861.index
+2952081112.index
+759737039.index
+826617445.index
+2592183968.index
+698909071.index

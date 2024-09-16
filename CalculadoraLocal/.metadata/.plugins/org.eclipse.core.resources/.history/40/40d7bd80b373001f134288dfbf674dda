@@ -1,0 +1,152 @@
+package application;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+public class CalculadoraClient {
+
+    public static void main(String[] args) {
+        String servidor = "rmi://localhost:1099/";
+        String nome = "CalculadoraService";
+        String directoryPath = "C:\\Users\\Ana Flavia\\DAM\\CalculadoraLocal\\";
+        String fileName = "tempos.txt";
+
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        File file = new File(directory, fileName);
+
+        try (FileWriter writer = new FileWriter(file)) {
+            ICalculadora c = (ICalculadora) Naming.lookup(servidor + nome);
+            System.out.println("Objeto Remoto " + nome + " encontrado no servidor.");
+
+            double x = 10, y = 5;
+            
+            long startTime, endTime;
+
+            
+            // Operações Aritméticas
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " + " + y + " = " + c.somar(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para somar: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " - " + y + " = " + c.subtrair(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para subtrair: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " * " + y + " = " + c.multiplicar(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para multiplicar: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " / " + y + " = " + c.dividir(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para divirdir: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+
+        	// Operações Aritméticas Avançadas
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " elevado a " + y + " = " + c.exponenciacao(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para exponenciação: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+
+            startTime = System.currentTimeMillis();
+            System.out.println("Raiz " + y + " de " + x + " = " + c.radiacao(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para radiação: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " % " + y + " = " + c.modulo(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para módulo: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+
+        	// Operações Lógicas e Comparativas
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " > " + y + " = " + c.maior(x, y));
+            writer.write("Tempo para maior: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " < " + y + " = " + c.menor(x, y));
+            writer.write("Tempo para menor: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " == " + y + " = " + c.igualdade(x, y));
+            writer.write("Tempo para igualdade: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " != " + y + " = " + c.diferenca(x, y));
+            writer.write("Tempo para dirença: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+        	// Outras Operações Matemáticas
+            startTime = System.currentTimeMillis();
+            System.out.println("Mínimo entre " + x + " e " + y + " = " + c.minimo(x, y));
+            writer.write("Tempo para mínimo: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println("Máximo entre " + x + " e " + y + " = " + c.maximo(x, y));
+            writer.write("Tempo para máximo: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+
+            // Operações de Cálculo de Juros e Operações para Amortização e Financiamentos
+            double capital = 1000.0;
+            double taxa = 0.05;
+            int tempo = 2;
+
+            startTime = System.currentTimeMillis();
+            System.out.println("Juros Simples = " + c.jurosSimples(capital, taxa, tempo));
+            writer.write("Tempo para juro simples: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println("Juros Compostos = " + c.jurosCompostos(capital, taxa, tempo));
+            writer.write("Tempo para juros compostos: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println("Taxa de Juros = " + c.calculotaxaJuros(capital, 100.0, tempo));
+            writer.write("Tempo para taxa de juros: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println("Valor da Parcela (Sistema Price) = " + c.valorParcela(capital, taxa, tempo));
+            writer.write("Tempo para Valor da Parcela (Sistema Price: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println("Amortização (Sistema SAC) = " + c.amortizacao(capital, tempo));
+            writer.write("Tempo para Amortização (Sistema SAC): " + (endTime - startTime) + " ms\n");
+            writer.flush();
+
+        } catch (MalformedURLException e) {
+            System.out.println("URL " + servidor + nome + " mal formatada.");
+        } catch (RemoteException e) {
+            System.out.println("Erro na invocação remota.");
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            System.out.println("Objeto remoto " + nome + " não está disponível.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

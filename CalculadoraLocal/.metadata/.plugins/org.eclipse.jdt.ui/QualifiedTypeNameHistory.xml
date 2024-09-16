@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.rmi.Remote"/>
+    <fullyQualifiedTypeName name="java.rmi.server.UnicastRemoteObject"/>
+    <fullyQualifiedTypeName name="application.Calculadora"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeAll"/>
+    <fullyQualifiedTypeName name="java.rmi.registry.LocateRegistry"/>
+    <fullyQualifiedTypeName name="java.rmi.Naming"/>
+    <fullyQualifiedTypeName name="java.net.MalformedURLException"/>
+    <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
+    <fullyQualifiedTypeName name="java.rmi.NotBoundException"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+</qualifiedTypeNameHistroy>

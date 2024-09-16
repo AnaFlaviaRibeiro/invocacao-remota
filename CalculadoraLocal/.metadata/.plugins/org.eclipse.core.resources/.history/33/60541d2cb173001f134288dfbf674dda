@@ -1,0 +1,101 @@
+package application;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+public class CalculadoraClient {
+
+    public static void main(String[] args) {
+        String servidor = "rmi://localhost:1099/";
+        String nome = "CalculadoraService";
+        String directoryPath = "C:\\Users\\Ana Flavia\\DAM\\CalculadoraLocal\\";
+        String fileName = "tempos.txt";
+        
+        // Cria o diretório se não existir
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Cria o arquivo dentro do diretório
+        File file = new File(directory, fileName);
+
+        try (FileWriter writer = new FileWriter(file)) {
+            ICalculadora c = (ICalculadora) Naming.lookup(servidor + nome);
+            System.out.println("Objeto Remoto " + nome + " encontrado no servidor.");
+
+            double x = 10, y = 5;
+            
+            long startTime, endTime;
+
+            
+            // Operações Aritméticas
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " + " + y + " = " + c.somar(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para somar: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " - " + y + " = " + c.subtrair(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para somar: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " * " + y + " = " + c.multiplicar(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para somar: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+            
+            startTime = System.currentTimeMillis();
+            System.out.println(x + " / " + y + " = " + c.dividir(x, y));
+            endTime = System.currentTimeMillis();
+            writer.write("Tempo para somar: " + (endTime - startTime) + " ms\n");
+            writer.flush();
+
+            // Exponenciação
+            System.out.println(x + " elevado a " + y + " = " + c.exponenciacao(x, y));
+
+            // Radiciação
+            System.out.println("Raiz " + y + " de " + x + " = " + c.radiacao(x, y));
+
+            // Módulo
+            System.out.println(x + " % " + y + " = " + c.modulo(x, y));
+
+            // Comparações
+            System.out.println(x + " > " + y + " = " + c.maior(x, y));
+            System.out.println(x + " < " + y + " = " + c.menor(x, y));
+            System.out.println(x + " == " + y + " = " + c.igualdade(x, y));
+            System.out.println(x + " != " + y + " = " + c.diferenca(x, y));
+            System.out.println("Mínimo entre " + x + " e " + y + " = " + c.minimo(x, y));
+            System.out.println("Máximo entre " + x + " e " + y + " = " + c.maximo(x, y));
+
+            // Juros
+            double capital = 1000.0;
+            double taxa = 0.05;
+            int tempo = 2;
+
+            System.out.println("Juros Simples = " + c.jurosSimples(capital, taxa, tempo));
+            System.out.println("Juros Compostos = " + c.jurosCompostos(capital, taxa, tempo));
+            System.out.println("Taxa de Juros = " + c.calculotaxaJuros(capital, 100.0, tempo));
+            System.out.println("Valor da Parcela (Sistema Price) = " + c.valorParcela(capital, taxa, tempo));
+            System.out.println("Amortização (Sistema SAC) = " + c.amortizacao(capital, tempo));
+
+        } catch (MalformedURLException e) {
+            System.out.println("URL " + servidor + nome + " mal formatada.");
+        } catch (RemoteException e) {
+            System.out.println("Erro na invocação remota.");
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            System.out.println("Objeto remoto " + nome + " não está disponível.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,0 +1,9 @@
+package application;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface ICalculadora extends Remote {
+	// Operações Aritméticas Básicas:
+	public double somar(double primeiroNum, double segundoNum) throws RemoteException;
+}
